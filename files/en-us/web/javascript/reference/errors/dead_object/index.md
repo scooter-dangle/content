@@ -10,8 +10,8 @@ tags:
 {{JSSidebar("Errors")}}
 
 The JavaScript exception "can't access dead object" occurs when Firefox disallows
-add-ons to keep strong references to DOM objects after their parent document has been
-destroyed to improve in memory usage and to prevent memory leaks.
+add-ons from keeping strong references to DOM objects after their parent document has been
+destroyed to improve memory usage and to prevent memory leaks.
 
 ## Message
 
@@ -25,12 +25,12 @@ TypeError: can't access dead object
 
 ## What went wrong?
 
-To improve in memory usage and to prevent memory leaks, Firefox disallows add-ons to
-keep strong references to DOM objects after their parent document has been destroyed. A
-dead object, is holding a strong (keep alive) reference to a DOM element that persists
+To improve memory usage and to prevent memory leaks, Firefox disallows add-ons from
+keeping strong references to DOM objects after their parent document has been destroyed. A
+dead object is holding a strong (keep alive) reference to a DOM element that persists
 even after it was destroyed in the DOM. To avoid these issues, references to DOM nodes
-in foreign document should instead be stored in an object which is specific to that
-document, and cleaned up when the document is unloaded, or stored as
+in a foreign document should instead be stored in an object that is specific to that
+document, and they should either be cleaned up when the document is unloaded or stored as
 [weak references](/en-US/docs/Mozilla/Tech/XPCOM/Language_Bindings/Components.utils.getWeakReference).
 
 ## Examples
@@ -38,7 +38,7 @@ document, and cleaned up when the document is unloaded, or stored as
 ### Checking if an object is dead
 
 [Components.utils](/en-US/docs/Mozilla/Tech/XPCOM/Language_Bindings/Components.utils)
-offers a `isDeadWrapper()` method, which privileged code might use.
+offers a `isDeadWrapper()` method, which privileged code may use.
 
 ```js
 if (Components.utils.isDeadWrapper(window)) {
@@ -46,7 +46,7 @@ if (Components.utils.isDeadWrapper(window)) {
 }
 ```
 
-Unprivileged code has no access to Component.utils and might just be able catch the
+Unprivileged code has no access to Component.utils and might only be able catch the
 exception.
 
 ```js
